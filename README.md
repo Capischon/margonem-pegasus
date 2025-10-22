@@ -1,5 +1,5 @@
 # margonem-pegasus
-[!NOTE]
+>[!NOTE]
 > Tylko nowy interface
 ## INSTALACJA
 1. Dodaj do przeglądarki wtyczkę [tampermonkey](https://www.tampermonkey.net/) lub podobną.
@@ -9,5 +9,5 @@ Pegasus nasłuchuje czat w poszukiwaniu określonych słów.\
 Przy dopasowaniu wiadomości podświetla ją, puszcza dźwięk i wysyła powiadomienie jeśli karta z grą nie jest aktywna.
 ## Konfiguracja
 Dodany przycisk włącza/wyłącza działanie skryptu. Zielony kolor #00ff00 = włączony, czerwony kolor #ff0000 = wyłączony.\
-Aby dodać/usunąć słowa do słownika należy edytować 16 linijke skryptu\
-> const keywords = ["lambo", "sopel", "sopla"];\
+Aby dodać/usunąć słowa do słownika należy edytować 16 linijke skryptu
+> const keywords = ["lambo", "sopel", "sopla"];
