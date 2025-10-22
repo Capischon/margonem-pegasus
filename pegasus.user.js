@@ -7,13 +7,17 @@
 // @match        https://*.margonem.pl/
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=margonem.pl
 // @grant        none
-// @downloadURL  https://raw.githubusercontent.com/Capischon/margonem-pegasus/refs/heads/main/pegasus.user.js
-// @updateURL    https://raw.githubusercontent.com/Capischon/margonem-pegasus/refs/heads/main/pegasus.user.js
+// @downloadURL  https://raw.githubusercontent.com/Capischon/margonem-pegasus/refs/heads/main/pegasus.js
+// @updateURL    https://raw.githubusercontent.com/Capischon/margonem-pegasus/refs/heads/main/pegasus.js
 // ==/UserScript==
 
 const delay = (time) => new Promise(resolve => setTimeout(resolve, time * 1000));
 
-const keywords = ["lambo", "sopel", "sopla"];
+const keywords = ["lambo",
+                  "sopel",
+                  "sopla",
+                  "amaimon"
+                 ];
 
 (async function() {
     'use strict';
@@ -22,8 +26,8 @@ const keywords = ["lambo", "sopel", "sopla"];
     }
     requestNotificationPermission();
     createButton();
-    pegasus();
     localStorage.getItem("observingStatus") === "ON" ? chatCheck() : null;
+    localStorage.getItem("observingStatus") === "ON" ? pegasus() : null;
 })();
 
 function createButton(){
@@ -40,13 +44,14 @@ function createButton(){
         alignItems: "center"
     });
 
-    localStorage.getItem("observingStatus") === "ON" || null ? widgetButton.classList.add("green") : widgetButton.classList.remove("green");
+    localStorage.getItem("observingStatus") === "ON" ? widgetButton.classList.add("green") : widgetButton.classList.remove("green");
 
     widgetButton.innerHTML = `<img src="https://micc.garmory-cdn.cloud/obrazki/npc/mez/npc275.gif" style="max-height: 80%;">`;
     widgetButton.addEventListener("click", extensionButtonClick => {
         if (widgetButton.classList.contains("green")){
             widgetButton.classList.remove("green")
             localStorage.setItem("observingStatus","OFF");
+            pegasus();
         }
         else {
             widgetButton.classList.add("green");
@@ -97,20 +102,25 @@ function soundAlert(message){
     }
 }
 
-function pegasus() {
+let observer;
 
+function pegasus() {
     const target = document.querySelector(".one-message-wrapper.active");
     const config = {childList: true};
+
+    if (observer instanceof MutationObserver){
+        observer.disconnect();
+    }
 
     const callback = (mutationList, observer) => {
         for (const mutation of mutationList) {
             for (const addedNode of mutation.addedNodes) {
                 const message = addedNode.querySelector(".message-section").textContent;
-                messageCheck(message, addedNode);
+                messageCheck(message, addedNode, true);
             }
         }
     }
-    const observer = new MutationObserver(callback);
+    observer = new MutationObserver(callback);
     if (localStorage.getItem("observingStatus") === "ON"){
         observer.observe(target, config);
         console.error("Started observing!");
@@ -123,7 +133,5 @@ function pegasus() {
 
 function requestNotificationPermission() {
     if (Notification.permission !== "granted") Notification.requestPermission();
-
 }
-
 
