@@ -10,4 +10,8 @@ Przy dopasowaniu wiadomości podświetla ją, puszcza dźwięk i wysyła powiado
 ## Konfiguracja
 Dodany przycisk włącza/wyłącza działanie skryptu. Zielony kolor `#00ff00` = włączony, czerwony kolor `#ff0000` = wyłączony.\
 Aby dodać/usunąć słowa do słownika należy edytować 16 linijke skryptu
-> const keywords = ["lambo", "sopel", "sopla"];
+> const keywords = ["lambo",
+                  "sopel",
+                  "sopla",
+                  "amaimon"
+                 ];
