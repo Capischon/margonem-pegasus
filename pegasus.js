@@ -7,6 +7,8 @@
 // @match        https://*.margonem.pl/
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=margonem.pl
 // @grant        none
+// @downloadURL  https://github.com/Capischon/margonem-pegasus/blob/main/pegasus.js
+// @updateURL    https://github.com/Capischon/margonem-pegasus/blob/main/pegasus.js
 // ==/UserScript==
 
 const delay = (time) => new Promise(resolve => setTimeout(resolve, time * 1000));
@@ -121,4 +123,5 @@ function pegasus() {
 
 function requestNotificationPermission() {
     if (Notification.permission !== "granted") Notification.requestPermission();
+
 }
